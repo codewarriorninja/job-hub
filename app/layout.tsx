@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { auth } from "@/auth";
 import SessionProvider from "@/components/SessionProvider";
+import QueryProvider from "@/hook/queryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <QueryProvider>
         <SessionProvider session={session}>
         <div className="min-h-screen bg-gray-50">
         <Navbar />
@@ -39,6 +41,7 @@ export default async function RootLayout({
         </main>
         </div>
         </SessionProvider>
+        </QueryProvider>
       </body>
     </html>
   );
