@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Job Hub",
-  description: "Job Hub",
+  title: "Job Hunter",
+  description: "Job Hunter",
 };
 
 export default async function RootLayout({

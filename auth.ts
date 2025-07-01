@@ -1,5 +1,7 @@
 import NextAuth from "next-auth"
 import GitHub from 'next-auth/providers/github'
+import Google from 'next-auth/providers/google'
+import Facebook from 'next-auth/providers/facebook'
 import {PrismaAdapter} from '@auth/prisma-adapter'
 import { PrismaClient } from "./generated/prisma"
 
@@ -10,7 +12,7 @@ export const {auth, handlers, signIn, signOut} = NextAuth({
     session:{
         strategy:'jwt',
     },
-    providers:[GitHub],
+    providers:[GitHub,Google,Facebook],
     adapter:PrismaAdapter(prisma),
     callbacks:{
         async jwt({token, user}) {
