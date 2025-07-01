@@ -16,20 +16,6 @@ type JobData = {
 };
 
 const postJob = async (jobData: JobData) => {
-
-  const { data: session, status } = useSession();
-
-  const router = useRouter();
-
-  if(status === 'loading'){
-    return <div>Loading....</div>
-  }
-
-  if(status === 'unauthenticated'){
-    router.push('/sign-in');
-    return null
-  }
-
   const res = await fetch("/api/jobs", {
     method: "POST",
     headers: {
@@ -46,6 +32,9 @@ const postJob = async (jobData: JobData) => {
 };
 
 const PostJobPage = () => {
+  const {data: session, status} = useSession();
+  const router = useRouter();
+
   const mutation = useMutation({
     mutationFn: postJob,
     onSuccess: () => {
@@ -58,6 +47,12 @@ const PostJobPage = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if(status === 'loading') return;
+    if(status === 'unauthenticated'){
+      router.push('/sign-in');
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const data = {
