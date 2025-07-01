@@ -3,6 +3,8 @@
 import { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { requireAuth } from "@/lib/auth";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type JobData = {
     title: string | FormDataEntryValue | null;
@@ -14,8 +16,20 @@ type JobData = {
 };
 
 const postJob = async (jobData: JobData) => {
-  await requireAuth();
-  
+
+  const { data: session, status } = useSession();
+
+  const router = useRouter();
+
+  if(status === 'loading'){
+    return <div>Loading....</div>
+  }
+
+  if(status === 'unauthenticated'){
+    router.push('/sign-in');
+    return null
+  }
+
   const res = await fetch("/api/jobs", {
     method: "POST",
     headers: {

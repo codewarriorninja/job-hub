@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { requireAuth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -32,7 +32,7 @@ export async function GET(req:NextRequest){
 }
 
 export async function POST(request: Request){
-    const session = await auth();
+    const session = await requireAuth();
 
     if(!session?.user || !session.user.id){
         return NextResponse.redirect(new URL("/sign-in", request.url))
