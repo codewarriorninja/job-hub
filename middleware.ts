@@ -12,7 +12,7 @@ export default auth((req) => {
   }
 
   // If user is not logged in and trying to access protected pages, redirect to sign-in
-  if (!isLoggedIn && nextUrl.pathname.startsWith("/dashboard")) {
+  if (!isLoggedIn && nextUrl.pathname.startsWith("/dashboard") || nextUrl.pathname.startsWith('/jobs/post')) {
     return NextResponse.redirect(new URL("/sign-in", nextUrl));
   }
 

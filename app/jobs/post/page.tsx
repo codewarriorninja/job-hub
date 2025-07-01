@@ -2,6 +2,7 @@
 
 import { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { requireAuth } from "@/lib/auth";
 
 type JobData = {
     title: string | FormDataEntryValue | null;
@@ -13,6 +14,8 @@ type JobData = {
 };
 
 const postJob = async (jobData: JobData) => {
+  await requireAuth();
+  
   const res = await fetch("/api/jobs", {
     method: "POST",
     headers: {
