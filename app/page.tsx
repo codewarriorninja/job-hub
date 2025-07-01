@@ -49,7 +49,7 @@ export default async function Home() {
                   </Link>
                   
                   <Link
-                    href="/post-job"
+                    href="/post"
                     className="group bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/30 transition-all duration-300 flex items-center gap-2"
                   >
                     Post a Job
